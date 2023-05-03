@@ -1,0 +1,570 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package proyek;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+
+import javax.swing.table.DefaultTableModel;
+/**
+/**
+ *
+ * @author asus
+ */
+public class Formlaporan extends javax.swing.JFrame {
+
+    /**
+     * Creates new form Formlaporan
+     */
+    Object[] rows ;
+    DefaultTableModel model;
+    Statement stmt;
+    Connection con;
+    PreparedStatement pr;
+    ResultSet rs;
+    ResultSet rs1;
+    ResultSet rs2;
+    ResultSet rs3;
+    ArrayList<String> laporan = new ArrayList<String>();
+    /**
+     * Creates new form FormAdmin
+     */
+    public Formlaporan() {
+        setUndecorated(true);
+        setBackground(new Color(1.0f,1.0f,1.0f,0.0f));
+        
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        initComponents();
+        
+        jTabledata2.setModel(new DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+            {null, null, null, null},
+           }, new String [] {" ", " ", " ", " "}
+        ));
+        
+        jButtonpreview.setOpaque(false);
+        jButtonpreview.setContentAreaFilled(false);
+        jButtonpreview.setBorderPainted(false);
+        jButtonpreview.setFocusPainted(false);
+        jButtonpreview.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        jButtoncetak.setOpaque(false);
+        jButtoncetak.setContentAreaFilled(false);
+        jButtoncetak.setBorderPainted(false);
+        jButtoncetak.setFocusPainted(false);
+        jButtoncetak.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        jButton1.setOpaque(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        jButton2.setOpaque(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        jButton4.setOpaque(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.setBorderPainted(false);
+        jButton4.setFocusPainted(false);
+        jButton4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+        jScrollPane2.getViewport().setOpaque(false);
+        jScrollPane2.getViewport().getView().setBackground(new Color(28,29,31));
+        
+//        jTabledata2.getTableHeader().setOpaque(false);
+//        jTabledata2.getTableHeader().setBackground(new Color(28,29,31));
+//        jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
+//        
+//        jTabledata2.getTableHeader().setForeground(Color.white);
+//        jTabledata2.setForeground(Color.white);
+        
+        Font headerFont = new Font("Arial", Font.BOLD, 19);
+        jTabledata2.getTableHeader().setFont(headerFont);
+        
+        Font contentFont = new Font("Helvetica", Font.PLAIN, 17);
+        jTabledata2.setFont(contentFont);
+        
+        
+        jTabledata2.setRowHeight(30);
+        
+        
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_proyek","root","");
+        } catch (Exception ex) {
+          
+        }
+        jComboBoxtipe.setSelectedIndex(0);
+        refreshTabel();
+
+    }
+public void refreshTabel()
+    {
+         model = new DefaultTableModel(rows, 0);
+         jTabledata2.setModel(model);
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jDatePickerUtil1 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil2 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil3 = new org.jdatepicker.util.JDatePickerUtil();
+        jDateChooserdari = new com.toedter.calendar.JDateChooser();
+        jDateChoosersampai = new com.toedter.calendar.JDateChooser();
+        jComboBoxtipe = new javax.swing.JComboBox<>();
+        jButtoncetak = new javax.swing.JButton();
+        jButtonpreview = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTabledata2 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTabledata = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jDateChooserdari.setBackground(new java.awt.Color(204, 102, 0));
+        jDateChooserdari.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jDateChooserdari.setMinimumSize(new java.awt.Dimension(179, 28));
+        jDateChooserdari.setPreferredSize(new java.awt.Dimension(179, 28));
+        getContentPane().add(jDateChooserdari, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 320, 30));
+        getContentPane().add(jDateChoosersampai, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 529, 330, 30));
+
+        jComboBoxtipe.setBackground(new java.awt.Color(255, 255, 0));
+        jComboBoxtipe.setEditable(true);
+        jComboBoxtipe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barang Paling Laku", "Barang Tidak Laku", "Minuman & Makanan dengan stok yang yang hampir habis" }));
+        jComboBoxtipe.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxtipeItemStateChanged(evt);
+            }
+        });
+        jComboBoxtipe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxtipeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBoxtipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 680, 330, 30));
+
+        jButtoncetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtoncetakActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtoncetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 770, 180, 40));
+
+        jButtonpreview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonpreviewActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonpreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 770, 170, 40));
+
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 30, 20, 20));
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 770, 190, 40));
+
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 30, 20, 20));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyek/Laporan.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 1070, 910));
+
+        jTabledata2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTabledata2);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 820, 254));
+
+        jTabledata.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTabledata);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 820, 254));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonpreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonpreviewActionPerformed
+     
+        refreshTabel();
+       jButtoncetak.setEnabled(true);
+        int tipe;
+        tipe = jComboBoxtipe.getSelectedIndex();
+        //Stok Sedikit
+        if (tipe==1) {
+              
+                rows = new Object[]{"Item","jumlah terjual"};
+                model = new DefaultTableModel(rows,0);
+                jTabledata2.setModel(model);
+                jTabledata2.setDefaultEditor(Object.class, null);
+                java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                String datedari = fmt.format(jDateChooserdari.getDate());
+                String datesampai = fmt.format(jDateChoosersampai.getDate());
+                try {
+                    pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.idroti left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=1 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idroti from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=1) tab1 where jumlah=(select min(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.idroti left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=1 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idroti from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=1) tab1)");
+
+                    rs2 = pr.executeQuery();
+
+                    pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.iddaging left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=2 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.iddaging from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=2) tab1 where jumlah= (select min(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.iddaging left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=2 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.iddaging from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=2) tab1)");
+
+                    rs = pr.executeQuery();
+                    
+                    pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.topping left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=3 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.topping from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=3) tab1 where jumlah=(select min(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.topping left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=3 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.topping from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=3) tab1)");
+                    
+                    rs1 = pr.executeQuery();
+                    
+                    pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahminuman),0) as jumlah  from menu m left join dtransiminuman dt on m.idmenu= dt.idminuman left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori= 4 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idminuman from dtransiminuman d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=4) tab1 where jumlah= (select min(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahminuman),0) as jumlah  from menu m left join dtransiminuman dt on m.idmenu= dt.idminuman left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori= 4 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idminuman from dtransiminuman d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=4) tab1)");
+                    
+                    rs3 = pr.executeQuery();
+
+                    while(rs2.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs2.getString("nama")+" (Roti)",rs2.getInt("jumlah")});                
+                        
+                    }
+                    rs2.close();
+
+                    while(rs.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs.getString("nama")+" (Daging)",rs.getInt("jumlah")});
+                        
+                    }
+                    rs.close();
+                    
+                    while(rs1.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs1.getString("nama")+" (Topping)",rs1.getInt("jumlah")});
+                        
+                    }
+                    rs1.close();
+                    
+                    
+                    while(rs3.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs3.getString("nama")+" (Minuman)",rs3.getInt("jumlah")});                
+                        
+                    }
+                    rs3.close();
+                    
+
+                    
+                } catch (Exception ex) {
+                    System.out.print(ex);
+
+                }
+        }
+        //item terlaris
+        else if (tipe == 0) {
+            if (jDateChooserdari.getDate().after(jDateChoosersampai.getDate())) {
+                JOptionPane.showMessageDialog(this,"Tanggal sampai tidak boleh lebih awal daripada tanggal dari!","Warning",JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                
+                java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                String datedari = fmt.format(jDateChooserdari.getDate());
+                String datesampai = fmt.format(jDateChoosersampai.getDate());
+                rows = new Object[]{"Item","Jumlah Pesanan"};
+                model = new DefaultTableModel(rows,0);
+                jTabledata2.setModel(model);
+                jTabledata2.setDefaultEditor(Object.class, null);
+                try {
+                    
+                   pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.idroti left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=1 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idroti from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=1) tab1 where jumlah=(select max(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.idroti left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=1 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idroti from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=1) tab1)");
+
+                    rs2 = pr.executeQuery();
+
+                   pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.iddaging left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=2 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.iddaging from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=2) tab1 where jumlah= (select max(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.iddaging left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=2 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.iddaging from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=2) tab1)");
+
+                    rs = pr.executeQuery();
+                    
+                    pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.topping left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=3 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.topping from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=3) tab1 where jumlah=(select max(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahmaincourse),0) as jumlah  from menu m left join dtransmaincourse dt on m.idmenu= dt.topping left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori=3 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.topping from dtransmaincourse d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=3) tab1)");
+                    
+                    rs1 = pr.executeQuery();
+                    
+                    pr = con.prepareStatement("select nama,jumlah from (select distinct m.nama as nama,NVL(sum(dt.jumlahminuman),0) as jumlah  from menu m left join dtransiminuman dt on m.idmenu= dt.idminuman left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori= 4 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idminuman from dtransiminuman d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=4) tab1 where jumlah= (select max(jumlah) from (select distinct m.nama as nama,NVL(sum(dt.jumlahminuman),0) as jumlah  from menu m left join dtransiminuman dt on m.idmenu= dt.idminuman left join htrans h on dt.idtrans=h.idtrans where h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"'and m.idkategori= 4 group by m.idmenu  union select m.nama as item, 0 as jumlah from menu m where m.idmenu NOT IN (select d.idminuman from dtransiminuman d, htrans h where d.idtrans = h.idtrans and h.tanggal >='"+ datedari + "' and h.tanggal <='" + datesampai +"') and m.idkategori=4) tab1)");
+                    
+                    rs3 = pr.executeQuery();
+                    while(rs2.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs2.getString("nama")+" (Roti)",rs2.getInt("jumlah")});                
+                        
+                    }
+                    rs2.close();
+
+                    while(rs.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs.getString("nama")+" (Daging)",rs.getInt("jumlah")});
+                        
+                    }
+                    rs.close();
+                    
+                    while(rs1.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs1.getString("nama")+" (Topping)",rs1.getInt("jumlah")});
+                        
+                    }
+                    rs1.close();
+                    
+                    
+                    while(rs3.next())
+                    {
+                        model.addRow(
+                                new Object[]
+                                {rs3.getString("nama")+" (Minuman)",rs3.getInt("jumlah")});                
+                        
+                    }
+                    rs3.close();
+                    
+                    
+                } catch (Exception ex) {
+                    System.out.print(ex);
+
+                }
+            }
+        }
+        else{      
+            if (jDateChooserdari.getDate().after(jDateChoosersampai.getDate())) {
+                JOptionPane.showMessageDialog(this,"Tanggal sampai tidak boleh lebih awal daripada tanggal dari!","Warning",JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                rows = new Object[]{"NAMA","STOK"};
+                model = new DefaultTableModel(rows,0);
+                jTabledata2.setModel(model);
+                jTabledata2.setDefaultEditor(Object.class, null);
+                try {
+
+                pr = con.prepareStatement("select nama,stok from menu where stok<10 ");
+
+                rs = pr.executeQuery();
+
+
+                while(rs.next())
+                {
+                    model.addRow(
+                            new Object[]
+                            {rs.getString("nama"),rs.getInt("stok")});
+                }
+                rs.close();
+            } catch (Exception ex) {
+                System.out.print(ex);
+
+            }
+                if (model.getRowCount()==0) {
+                    model.addRow(
+                            new Object[]
+                            {"Tidak ada","Tidak ada"});
+                }
+            }
+        }                       
+    }//GEN-LAST:event_jButtonpreviewActionPerformed
+
+    private void jComboBoxtipeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxtipeItemStateChanged
+        if (jComboBoxtipe.getSelectedIndex()==2) {
+            jDateChooserdari.setEnabled(false);
+            jDateChoosersampai.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxtipeItemStateChanged
+
+    private void jButtoncetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncetakActionPerformed
+       if (model.getRowCount()==0) {
+             JOptionPane.showMessageDialog(null, "Harus preview terlebih dahulu"); 
+        }
+        else{
+        String tempdata="";
+        for (int i = 0; i < model.getRowCount(); i++) { 
+            for (int j = 0; j < model.getColumnCount() ; j++) {
+                tempdata=tempdata+model.getValueAt(i,j).toString();
+                tempdata=tempdata+" ";
+            }
+            
+            
+        }
+        laporan.add(tempdata);
+            
+        try{
+        //                                                                   V  = jika true maka file di append, kalau false di overwrite
+        PrintWriter out = new PrintWriter(new FileOutputStream("laporan.txt", false), true);
+        out.println(jComboBoxtipe.getSelectedItem().toString());
+        for (String str:laporan){
+            
+            out.println(laporan);
+        }
+       
+        }catch(Exception e){
+
+        }
+        laporan.clear();
+         JOptionPane.showMessageDialog(null, "Berhasil mecetak laporan"); 
+        }
+        
+        
+    }//GEN-LAST:event_jButtoncetakActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FormAdmin admin = new FormAdmin();
+        admin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.setExtendedState (Formlaporan.ICONIFIED);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBoxtipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxtipeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxtipeActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Formlaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Formlaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Formlaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Formlaporan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Formlaporan().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtoncetak;
+    private javax.swing.JButton jButtonpreview;
+    private javax.swing.JComboBox<String> jComboBoxtipe;
+    private com.toedter.calendar.JDateChooser jDateChooserdari;
+    private com.toedter.calendar.JDateChooser jDateChoosersampai;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil2;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTabledata;
+    private javax.swing.JTable jTabledata2;
+    // End of variables declaration//GEN-END:variables
+}
